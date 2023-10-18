@@ -1,2 +1,2 @@
 # plant-monitor-ceworkshop
-CE workshop for plant-monitor, duncan lecture
+Connected Environment workshop for plant monitor, workshop no.2
