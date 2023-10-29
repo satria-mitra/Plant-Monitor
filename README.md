@@ -1,2 +1,3 @@
-# plant-monitor-ceworkshop
-Connected Environment workshop for plant monitor, workshop no.2
+# PlantMonitor_project
+CASA0014 Connected Environment project for plant monitor, workshop no.2
+
