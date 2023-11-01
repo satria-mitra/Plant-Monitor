@@ -47,7 +47,7 @@ The original project was built using Plant Monitor Shield V2 from [Plant Monitor
 Image: Prototyping process with LCD added
 
 ### Schematis and paper design
-Started with thinking of what features that I want to add to plant monitor, I ended up with adding OLED Display to the original projects. Apart from DTH 22, soil mosture sensors and voltage divider circuit, I added schematics for OLED Display. The sketch below shows the design of the circuit :
+Started with thinking of what features that I want to add to plant monitor, I ended up with adding OLED Display to the original projects. Apart from the original schematics (which can be seen in [Duncan's Plant monitor projects](https://github.com/ucl-casa-ce/casa0014/tree/main/plantMonitor), I added schematics for OLED Display. The sketch below shows the design of the circuit :
 
 
 ![Schematics](https://github.com/satria-mitra/Plant-Monitor/blob/main/assets/schematiscs.jpg)
