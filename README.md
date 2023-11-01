@@ -1,3 +1,8 @@
+![Lily](https://github.com/satria-mitra/Plant-Monitor/blob/main/asset/lily.jpg)
+Say Hi to Lily!
+
+
+
 # Lily - Plant Monitoring project that watch her conditions and sending messages to cheer her up
 This repository is CASA0014 Connected Environment project for plant monitor, workshop no.2.
 
