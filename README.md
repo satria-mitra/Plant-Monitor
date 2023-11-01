@@ -78,7 +78,8 @@ Image: InfluxDB shows data from Raspberry PI
 
 Grafana could be used as a dashboard to display the data. In order to do this, in Grafana we create a new dashboard and copy this code to the query to the query panel on the bottom. Again, this code can be seen on [CE Workshop Plant Monitor](https://workshops.cetools.org/codelabs/CASA0014-2-Plant-Monitor/#0)
 
-![dashboard](https://github.com/satria-mitra/Plant-Monitor/blob/main/asset/prototyping_process.jpg)
+![dashboard](https://github.com/satria-mitra/Plant-Monitor/blob/main/asset/grafana.jpg)
+
 Image: Prototyping process
 
 
