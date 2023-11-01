@@ -56,7 +56,7 @@ Started with thinking of what features that I want to add to plant monitor, I en
 
 Image: Schematics on paper, red dotted line shows original project, blue dotted line shows additional OLED Display 
 
-## Uploading the data to CE MQTT Server
+# Uploading the data to Internet
 
 - I  use MQTT protocols to send the data to the CE server. The data (Temperature, humidity, and soil mosture) was sent to the topic `student/CASA0014/plant/ucfnmut/`.
 
