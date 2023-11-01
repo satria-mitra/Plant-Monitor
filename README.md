@@ -59,7 +59,7 @@ Image: Schematics on paper, red dotted line shows original project, blue dotted 
 
 I also want to implement improvement in the future if I have a chance to upgrade this project. Some cool features that came into my mind were :
 
-- Playing a sound from subscribed messages using [Talki library] (https://www.arduinolibraries.info/libraries/talkie)
+- Playing a sound from subscribed messages using [Talki library](https://www.arduinolibraries.info/libraries/talkie)
 - [Sonification project](https://www.instructables.com/Biodata-Sonification/) using sound to illustrate how a Plant could singing :)
 - [RGB Audio visualizer](https://projecthub.arduino.cc/janux/rgb-32-band-audio-spectrum-visualizer-2f4788) also would be a perfect companion for that sonification idea
 
