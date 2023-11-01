@@ -1,6 +1,6 @@
-![Lily](https://github.com/satria-mitra/Plant-Monitor/blob/main/asset/lily.jpg)
+:![Lily](https://github.com/satria-mitra/Plant-Monitor/blob/main/asset/lily.jpg):
 
-Say Hi to Lily!
+:Say Hi to Lily!:
 
 # Lily - Plant Monitoring project that watch her conditions and sending messages to cheer her up
 This repository is CASA0014 Connected Environment project for plant monitor, workshop no.2.
@@ -95,7 +95,11 @@ Image: Grafana Dashboard showing data from Lily
 
 This is the final project looks like that I build during my workshop at CASA. I hope to make this even better in the future
 
- ![final](#)
+ ![final]((https://github.com/satria-mitra/Plant-Monitor/blob/main/asset/final1.jpg))
+
+ 
+ ![How this V.1 looks like]((https://github.com/satria-mitra/Plant-Monitor/blob/main/asset/final2.jpg))
+
 
 
 
