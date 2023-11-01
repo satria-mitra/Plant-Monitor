@@ -52,7 +52,14 @@ Started with thinking of what features that I want to add to plant monitor, I en
 
 ![Schematics](https://github.com/satria-mitra/Plant-Monitor/blob/main/assets/schematiscs.jpg)
 
+
+
 Image: Schematics on paper, red dotted line shows original project, blue dotted line shows additional OLED Display 
+
+## Uploading the data to CE MQTT Server
+
+We use MQTT protocols to send the data to the CE server. Details about this MQTT server is located inside arduino_secrets.h
+
 
 
 ## Future Improvement
