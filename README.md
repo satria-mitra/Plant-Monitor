@@ -38,7 +38,7 @@ Apart from [cool plant monitor](https://github.com/ucl-casa-ce/casa0014/tree/mai
 The `subscribeToTopic()` function is executed to display messages from a certain topic which we subscribed. This function would display the message to serial monitor for debugging purpose
 
 
-## Building process
+# Building process
 
 The original project was built using Plant Monitor Shield V2 from [Plant Monitor](https://github.com/ucl-casa-ce/casa0014/tree/main/plantMonitor) and mainly built during CE Wokrshop in the class. To add LCD display, I use a breadboard for prototyping. 
 
@@ -46,7 +46,7 @@ The original project was built using Plant Monitor Shield V2 from [Plant Monitor
 
 Image: Prototyping process with LCD added
 
-### Schematis and paper design
+## Schematis and paper design
 Started with thinking of what features that I want to add to plant monitor, I ended up with adding OLED Display to the original projects. Apart from the original schematics (which can be seen in [Duncan's Plant monitor projects](https://github.com/ucl-casa-ce/casa0014/tree/main/plantMonitor), I added schematics for OLED Display. The sketch below shows the design of the circuit :
 
 
@@ -58,11 +58,32 @@ Image: Schematics on paper, red dotted line shows original project, blue dotted 
 
 ## Uploading the data to CE MQTT Server
 
-We use MQTT protocols to send the data to the CE server. Details about this MQTT server is located inside arduino_secrets.h
+- I  use MQTT protocols to send the data to the CE server. The data (Temperature, humidity, and soil mosture) was sent to the topic `student/CASA0014/plant/ucfnmut/`.
+
+ ![mqttdata](#)
+
+## Setting up the Rasp PI as a gateway and storing data
+I use Rasp PI as a gateway. The whole process is long enough, but it could be read from the [CE Workshop Plant Monitor](https://workshops.cetools.org/codelabs/CASA0014-2-Plant-Monitor/#0). In short, the process include :
+- Setting up Raspberry Pi as a gateway
+- Install InfluxDB, Telegraf, Grafana in Raspberry PI
+- Configure InfluxDB and Telegraf to capture the data from MQTT topics.
+- Create a dashboard in Grafana to visualize the data
+
+## Visualizing the data in Grafana
+
+Grafana could be used as a dashboard to display the data. In order to do this, in Grafana we create a new dashboard and copy this code to the query to the query panel on the bottom. Again, this code can be seen on [CE Workshop Plant Monitor](https://workshops.cetools.org/codelabs/CASA0014-2-Plant-Monitor/#0)
+
+![dashboard](#)
+
+# Results
+
+This is the final project looks like that I build during my workshop at CASA. I hope to make this even better in the future
+
+ ![final](#)
 
 
 
-## Future Improvement
+# Future Improvement
 
 I also want to implement improvement in the future if I have a chance to upgrade this project. Some cool features that came into my mind were :
 
