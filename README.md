@@ -42,12 +42,12 @@ The `subscribeToTopic()` function is executed to display messages from a certain
 
 The original project was built using Plant Monitor Shield V2 from [Plant Monitor](https://github.com/ucl-casa-ce/casa0014/tree/main/plantMonitor) and mainly built during CE Wokrshop in the class. To add LCD display, I use a breadboard for prototyping. 
 
-![Prototyping process](http://url/to/img.png)
+![Prototyping process](https://github.com/satria-mitra/Plant-Monitor/blob/main/assets/prototyping_process.jpg)
 
 Image: Prototyping process with LCD added
 
 ### Schematis and paper design
-Started with thinking of what features that I want to add to plant monitor, I ended up with adding OLED Display to the original projects. The sketch below shows the design of the circuit :
+Started with thinking of what features that I want to add to plant monitor, I ended up with adding OLED Display to the original projects. Apart from DTH 22, soil mosture sensors and voltage divider circuit, I added schematics for OLED Display. The sketch below shows the design of the circuit :
 
 
 ![Schematics](http://url/to/img.png)
