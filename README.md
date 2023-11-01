@@ -42,7 +42,7 @@ The `subscribeToTopic()` function is executed to display messages from a certain
 
 The original project was built using Plant Monitor Shield V2 from [Plant Monitor](https://github.com/ucl-casa-ce/casa0014/tree/main/plantMonitor) and mainly built during CE Wokrshop in the class. To add LCD display, I use a breadboard for prototyping. 
 
-![Prototyping process](https://github.com/satria-mitra/Plant-Monitor/blob/main/assets/prototyping_process.jpg)
+![Prototyping process](https://github.com/satria-mitra/Plant-Monitor/blob/main/asset/prototyping_process.jpg)
 
 Image: Prototyping process with LCD added
 
@@ -50,9 +50,7 @@ Image: Prototyping process with LCD added
 Started with thinking of what features that I want to add to plant monitor, I ended up with adding OLED Display to the original projects. Apart from the original schematics (which can be seen in [Duncan's Plant monitor projects](https://github.com/ucl-casa-ce/casa0014/tree/main/plantMonitor), I added schematics for OLED Display. The sketch below shows the design of the circuit :
 
 
-![Schematics](https://github.com/satria-mitra/Plant-Monitor/blob/main/assets/schematiscs.jpg)
-
-
+![Schematics](https://github.com/satria-mitra/Plant-Monitor/blob/main/asset/schematiscs.jpg)
 
 Image: Schematics on paper, red dotted line shows original project, blue dotted line shows additional OLED Display 
 
@@ -69,11 +67,17 @@ I use Rasp PI as a gateway. The whole process is long enough, but it could be re
 - Configure InfluxDB and Telegraf to capture the data from MQTT topics.
 - Create a dashboard in Grafana to visualize the data
 
+![dashboard](https://github.com/satria-mitra/Plant-Monitor/blob/main/asset/influxdb.jpg)
+Image: InfluxDB shows data from Raspberry PI
+
+
 ## Visualizing the data in Grafana
 
 Grafana could be used as a dashboard to display the data. In order to do this, in Grafana we create a new dashboard and copy this code to the query to the query panel on the bottom. Again, this code can be seen on [CE Workshop Plant Monitor](https://workshops.cetools.org/codelabs/CASA0014-2-Plant-Monitor/#0)
 
-![dashboard](#)
+![dashboard](https://github.com/satria-mitra/Plant-Monitor/blob/main/asset/prototyping_process.jpg)
+Image: Prototyping process
+
 
 # Results
 
