@@ -50,9 +50,9 @@ Image: Prototyping process with LCD added
 Started with thinking of what features that I want to add to plant monitor, I ended up with adding OLED Display to the original projects. Apart from DTH 22, soil mosture sensors and voltage divider circuit, I added schematics for OLED Display. The sketch below shows the design of the circuit :
 
 
-![Schematics](http://url/to/img.png)
+![Schematics](https://github.com/satria-mitra/Plant-Monitor/blob/main/assets/schematiscs.jpg)
 
-Image: Schematics on paper
+Image: Schematics on paper, red dotted line shows original project, blue dotted line shows additional OLED Display 
 
 
 ## Future Improvement
