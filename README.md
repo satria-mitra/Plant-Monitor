@@ -58,7 +58,10 @@ Image: Schematics on paper, red dotted line shows original project, blue dotted 
 
 - I  use MQTT protocols to send the data to the CE server. The data (Temperature, humidity, and soil mosture) was sent to the topic `student/CASA0014/plant/ucfnmut/`.
 
- ![mqttdata](#)
+ ![mqttdata](https://github.com/satria-mitra/Plant-Monitor/blob/main/asset/mqttexplorer.jpg)
+
+ Image: Data on MQTT Explorer 
+
 
 ## Setting up the Rasp PI as a gateway and storing data
 I use Rasp PI as a gateway. The whole process is long enough, but it could be read from the [CE Workshop Plant Monitor](https://workshops.cetools.org/codelabs/CASA0014-2-Plant-Monitor/#0). In short, the process include :
