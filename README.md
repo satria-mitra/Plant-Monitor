@@ -95,10 +95,10 @@ Image: Grafana Dashboard showing data from Lily
 
 This is the final project looks like that I build during my workshop at CASA. I hope to make this even better in the future
 
- ![final]((https://github.com/satria-mitra/Plant-Monitor/blob/main/asset/final1.jpg))
+ ![final](https://github.com/satria-mitra/Plant-Monitor/blob/main/asset/final1.jpg)
 
  
- ![How this V.1 looks like]((https://github.com/satria-mitra/Plant-Monitor/blob/main/asset/final2.jpg))
+ ![How this V.1 looks like](https://github.com/satria-mitra/Plant-Monitor/blob/main/asset/final2.jpg)
 
 
 
