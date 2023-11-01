@@ -1,9 +1,13 @@
-# Plant Monitor project
-This repository is CASA0014 Connected Environment project for plant monitor, workshop no.2
+# Lily - Plant Monitoring project that watch her conditions and sending messages to cheer her up
+This repository is CASA0014 Connected Environment project for plant monitor, workshop no.2.
 
 # Overview
-This project is based on Plant Monitor that could monitor a plant conditions such as temperature, humidity and soil mosture, send this data to MQTT CE server via wifi and display live data via webserver and from Grafana. 
-I add another function to display those parameters to OLED Display and also add a function to display message from a subscribed topic so I can communicate with my plant.
+This project is based on [CASA CE Plant Monitor](https://github.com/ucl-casa-ce/casa0014/tree/main/plantMonitor) that could monitor a plant conditions such as temperature, humidity and soil mosture, send this data to MQTT CE server via wifi and display live data via webserver and from Grafana. 
+
+## Features added V.1
+Some cool features that has been implemented are :
+- Subscribing to a topic `student/CASA0014/ucfnmut/forLily` and sending the messages to Lily
+- Displaying the message on OLED Display
 
 ## Prerequisites
 
@@ -80,7 +84,7 @@ Grafana could be used as a dashboard to display the data. In order to do this, i
 
 ![dashboard](https://github.com/satria-mitra/Plant-Monitor/blob/main/asset/grafana.jpg)
 
-Image: Prototyping process
+Image: Grafana Dashboard showing data from Lily
 
 
 # Results
