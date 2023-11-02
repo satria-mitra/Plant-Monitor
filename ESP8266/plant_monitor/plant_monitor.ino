@@ -15,6 +15,9 @@
 #include <DHT.h>
 #include <DHT_U.h>
 
+// lib for oled display
+#include "ssd1306.h"
+
 #define DHTTYPE DHT22   // DHT 22  (AM2302), AM2321
 
 // Sensors - DHT22 and Nails
@@ -56,6 +59,12 @@ int value = 0;
 // Date and time
 Timezone GB;
 
+// var to store messages from subscribed topic
+char receivedMessage[50];
+
+// for checking time
+unsigned long lastUpdateTime = 0;
+uint32_t lastMillis;
 
 
 void setup() {
@@ -88,6 +97,18 @@ void setup() {
   // start MQTT server
   client.setServer(mqtt_server, 1884);
   client.setCallback(callback);
+  
+  // Call the function to subscribe MQTT Topic
+  subscribeToTopic("student/CASA0014/ucfnmut/forLily");
+
+  // init the oled display
+  ssd1306_128x64_i2c_init();
+  ssd1306_fillScreen(0x00);
+  ssd1306_setFixedFont(ssd1306xled_font6x8);
+
+
+
+  lastMillis = millis();
 
 }
 
@@ -102,6 +123,24 @@ void loop() {
   }
   
   client.loop();
+  ssd1306_clearScreen();
+  ssd1306_printFixed(6,  16, receivedMessage, STYLE_NORMAL);
+   }
+}
+
+void subscribeToTopic(const char* mqttTopic) {
+  if (!client.connected()) {
+    reconnect();
+  }
+
+  // Subscribe to the specified MQTT topic
+  if (client.subscribe(mqttTopic)) {
+    Serial.print("Subscribed to topic: ");
+    Serial.println(mqttTopic);
+  } else {
+    Serial.print("Failed to subscribe to topic: ");
+    Serial.println(mqttTopic);
+  }
 }
 
 void readMoisture(){
@@ -189,6 +228,8 @@ void callback(char* topic, byte* payload, unsigned int length) {
   } else {
     digitalWrite(BUILTIN_LED, HIGH);  // Turn the LED off by making the voltage HIGH
   }
+ // Store the received message in the global variable
+  snprintf(receivedMessage, sizeof(receivedMessage), "%.*s", length, (char*)payload);
 
 }
 
