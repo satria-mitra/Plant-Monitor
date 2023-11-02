@@ -18,6 +18,7 @@
 // lib for oled display
 #include "ssd1306.h"
 
+
 #define DHTTYPE DHT22   // DHT 22  (AM2302), AM2321
 
 // Sensors - DHT22 and Nails
@@ -28,6 +29,8 @@ float Humidity;
 int Moisture = 1; // initial value just in case web page is loaded before readMoisture called
 int sensorVCC = 13;
 int blueLED = 2;
+int yellowLED = 16;
+
 DHT dht(DHTPin, DHTTYPE);   // Initialize DHT sensor.
 
 
@@ -67,12 +70,19 @@ unsigned long lastUpdateTime = 0;
 uint32_t lastMillis;
 
 
+
 void setup() {
   // Set up LED to be controllable via broker
   // Initialize the BUILTIN_LED pin as an output
   // Turn the LED off by making the voltage HIGH
   pinMode(BUILTIN_LED, OUTPUT);     
   digitalWrite(BUILTIN_LED, HIGH);  
+
+  // set up yellow LED
+  pinMode(16, OUTPUT);     
+  digitalWrite(16, LOW);  
+
+
 
   // Set up the outputs to control the soil sensor
   // switch and the blue LED for status indicator
@@ -97,18 +107,14 @@ void setup() {
   // start MQTT server
   client.setServer(mqtt_server, 1884);
   client.setCallback(callback);
-  
+
   // Call the function to subscribe MQTT Topic
   subscribeToTopic("student/CASA0014/ucfnmut/forLily");
 
   // init the oled display
   ssd1306_128x64_i2c_init();
-  ssd1306_fillScreen(0x00);
-  ssd1306_setFixedFont(ssd1306xled_font6x8);
-
-
-
-  lastMillis = millis();
+  ssd1306_clearScreen();
+  ssd1306_setFixedFont(comic_sans_font24x32_123);
 
 }
 
@@ -123,9 +129,15 @@ void loop() {
   }
   
   client.loop();
+  ssd1306_setFixedFont(ssd1306xled_font6x8);
   ssd1306_clearScreen();
-  ssd1306_printFixed(6,  16, receivedMessage, STYLE_NORMAL);
-   }
+  ssd1306_printFixedN(0,  24, receivedMessage, STYLE_NORMAL, FONT_SIZE_2X);
+  digitalWrite(16, HIGH); 
+  delay(1000);
+  digitalWrite(16, LOW);  
+
+
+
 }
 
 void subscribeToTopic(const char* mqttTopic) {
@@ -228,7 +240,8 @@ void callback(char* topic, byte* payload, unsigned int length) {
   } else {
     digitalWrite(BUILTIN_LED, HIGH);  // Turn the LED off by making the voltage HIGH
   }
- // Store the received message in the global variable
+
+  // Store the received message in the global variable
   snprintf(receivedMessage, sizeof(receivedMessage), "%.*s", length, (char*)payload);
 
 }
