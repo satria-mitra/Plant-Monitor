@@ -1,143 +1,86 @@
-/*
-    Get date and time - uses the ezTime library at https://github.com/ropg/ezTime -
-    and then show data from a DHT22 on a web page served by the Huzzah and
-    push data to an MQTT server - uses library from https://pubsubclient.knolleary.net
-
-    Duncan Wilson
-    CASA0014 - 2 - Plant Monitor Workshop
-    May 2020
-*/
-
 #include <ESP8266WiFi.h>
 #include <ESP8266WebServer.h>
 #include <ezTime.h>
 #include <PubSubClient.h>
 #include <DHT.h>
 #include <DHT_U.h>
-
-// lib for oled display
 #include "ssd1306.h"
 
-
-#define DHTTYPE DHT22   // DHT 22  (AM2302), AM2321
-
-// Sensors - DHT22 and Nails
-uint8_t DHTPin = 12;        // on Pin 2 of the Huzzah
-uint8_t soilPin = 0;      // ADC or A0 pin on Huzzah
+#define DHTTYPE DHT22
+uint8_t DHTPin = 12;
+uint8_t soilPin = 0;
 float Temperature;
 float Humidity;
-int Moisture = 1; // initial value just in case web page is loaded before readMoisture called
+int Moisture = 1;
 int sensorVCC = 13;
 int blueLED = 2;
-int yellowLED = 16;
 
-DHT dht(DHTPin, DHTTYPE);   // Initialize DHT sensor.
+DHT dht(DHTPin, DHTTYPE);
+String userInput = "";
+char msg[50];
+char receivedMessage[50]; // Moved to global scope
 
+#include "arduino_secrets.h"
 
-// Wifi and MQTT
-#include "arduino_secrets.h" 
-/*
-**** please enter your sensitive data in the Secret tab/arduino_secrets.h
-**** using format below
-
-#define SECRET_SSID "ssid name"
-#define SECRET_PASS "ssid password"
-#define SECRET_MQTTUSER "user name - eg student"
-#define SECRET_MQTTPASS "password";
- */
-
-const char* ssid     = SECRET_SSID;
+const char* ssid = SECRET_SSID;
 const char* password = SECRET_PASS;
 const char* mqttuser = SECRET_MQTTUSER;
 const char* mqttpass = SECRET_MQTTPASS;
+const char* mqtt_server = "mqtt.cetools.org";
 
 ESP8266WebServer server(80);
-const char* mqtt_server = "mqtt.cetools.org";
 WiFiClient espClient;
 PubSubClient client(espClient);
-long lastMsg = 0;
-char msg[50];
-int value = 0;
-
-// Date and time
 Timezone GB;
 
-// var to store messages from subscribed topic
-char receivedMessage[50];
-
-// for checking time
-unsigned long lastUpdateTime = 0;
-uint32_t lastMillis;
-
-
+// Rest of the code remains the same...
 
 void setup() {
-  // Set up LED to be controllable via broker
-  // Initialize the BUILTIN_LED pin as an output
-  // Turn the LED off by making the voltage HIGH
-  pinMode(BUILTIN_LED, OUTPUT);     
-  digitalWrite(BUILTIN_LED, HIGH);  
-
-  // set up yellow LED
-  pinMode(16, OUTPUT);     
-  digitalWrite(16, LOW);  
-
-
-
-  // Set up the outputs to control the soil sensor
-  // switch and the blue LED for status indicator
-  pinMode(sensorVCC, OUTPUT); 
+  pinMode(BUILTIN_LED, OUTPUT);
+  digitalWrite(BUILTIN_LED, HIGH);
+  pinMode(16, OUTPUT);
+  digitalWrite(16, LOW);
+  pinMode(sensorVCC, OUTPUT);
   digitalWrite(sensorVCC, LOW);
-  pinMode(blueLED, OUTPUT); 
+  pinMode(blueLED, OUTPUT);
   digitalWrite(blueLED, HIGH);
 
-  // open serial connection for debug info
   Serial.begin(115200);
   delay(100);
 
-  // start DHT sensor
   pinMode(DHTPin, INPUT);
   dht.begin();
 
-  // run initialisation functions
   startWifi();
   startWebserver();
   syncDate();
 
-  // start MQTT server
   client.setServer(mqtt_server, 1884);
   client.setCallback(callback);
-
-  // Call the function to subscribe MQTT Topic
   subscribeToTopic("student/CASA0014/ucfnmut/forLily");
 
-  // init the oled display
   ssd1306_128x64_i2c_init();
   ssd1306_clearScreen();
   ssd1306_setFixedFont(comic_sans_font24x32_123);
 
+  Serial.println("IP address: ");
+  Serial.println(WiFi.localIP());
 }
 
 void loop() {
-  // handler for receiving requests to webserver
   server.handleClient();
-
   if (minuteChanged()) {
     readMoisture();
     sendMQTT();
-    Serial.println(GB.dateTime("H:i:s")); // UTC.dateTime("l, d-M-y H:i:s.v T")
+    Serial.println(GB.dateTime("H:i:s"));
   }
-  
   client.loop();
   ssd1306_setFixedFont(ssd1306xled_font6x8);
   ssd1306_clearScreen();
   ssd1306_printFixedN(0,  24, receivedMessage, STYLE_NORMAL, FONT_SIZE_2X);
-  digitalWrite(16, HIGH); 
+  digitalWrite(16, HIGH);
   delay(1000);
-  digitalWrite(16, LOW);  
-
-
-
+  digitalWrite(16, LOW);
 }
 
 void subscribeToTopic(const char* mqttTopic) {
@@ -145,7 +88,6 @@ void subscribeToTopic(const char* mqttTopic) {
     reconnect();
   }
 
-  // Subscribe to the specified MQTT topic
   if (client.subscribe(mqttTopic)) {
     Serial.print("Subscribed to topic: ");
     Serial.println(mqttTopic);
@@ -155,29 +97,23 @@ void subscribeToTopic(const char* mqttTopic) {
   }
 }
 
-void readMoisture(){
-  
-  // power the sensor
+void readMoisture() {
   digitalWrite(sensorVCC, HIGH);
   digitalWrite(blueLED, LOW);
   delay(100);
-  // read the value from the sensor:
-  Moisture = analogRead(soilPin);         
-  digitalWrite(sensorVCC, LOW);  
+  Moisture = analogRead(soilPin);
+  digitalWrite(sensorVCC, LOW);
   digitalWrite(blueLED, HIGH);
   delay(100);
-  Serial.print("Wet ");
-  Serial.println(Moisture);   // read the value from the nails
+  Serial.print("Moisture: ");
+  Serial.println(Moisture);
 }
 
 void startWifi() {
-  // We start by connecting to a WiFi network
   Serial.println();
   Serial.print("Connecting to ");
   Serial.println(ssid);
   WiFi.begin(ssid, password);
-
-  // check to see if connected and wait until you are
   while (WiFi.status() != WL_CONNECTED) {
     delay(500);
     Serial.print(".");
@@ -189,39 +125,34 @@ void startWifi() {
 }
 
 void syncDate() {
-  // get real date and time
   waitForSync();
   Serial.println("UTC: " + UTC.dateTime());
   GB.setLocation("Europe/London");
   Serial.println("London time: " + GB.dateTime());
-
 }
 
 void sendMQTT() {
-
   if (!client.connected()) {
     reconnect();
   }
   client.loop();
 
-  Temperature = dht.readTemperature(); // Gets the values of the temperature
+  Temperature = dht.readTemperature();
   snprintf (msg, 50, "%.1f", Temperature);
   Serial.print("Publish message for t: ");
   Serial.println(msg);
   client.publish("student/CASA0014/plant/ucfnmut/temperature", msg);
 
-  Humidity = dht.readHumidity(); // Gets the values of the humidity
+  Humidity = dht.readHumidity();
   snprintf (msg, 50, "%.0f", Humidity);
   Serial.print("Publish message for h: ");
   Serial.println(msg);
   client.publish("student/CASA0014/plant/ucfnmut/humidity", msg);
 
-  //Moisture = analogRead(soilPin);   // moisture read by readMoisture function
   snprintf (msg, 50, "%.0i", Moisture);
   Serial.print("Publish message for m: ");
   Serial.println(msg);
   client.publish("student/CASA0014/plant/ucfnmut/moisture", msg);
-
 }
 
 void callback(char* topic, byte* payload, unsigned int length) {
@@ -233,55 +164,59 @@ void callback(char* topic, byte* payload, unsigned int length) {
   }
   Serial.println();
 
-  // Switch on the LED if an 1 was received as first character
   if ((char)payload[0] == '1') {
-    digitalWrite(BUILTIN_LED, LOW);   // Turn the LED on (Note that LOW is the voltage level
-    // but actually the LED is on; this is because it is active low on the ESP-01)
+    digitalWrite(BUILTIN_LED, LOW);
   } else {
-    digitalWrite(BUILTIN_LED, HIGH);  // Turn the LED off by making the voltage HIGH
+    digitalWrite(BUILTIN_LED, HIGH);
   }
 
-  // Store the received message in the global variable
   snprintf(receivedMessage, sizeof(receivedMessage), "%.*s", length, (char*)payload);
-
 }
 
 void reconnect() {
-  // Loop until we're reconnected
   while (!client.connected()) {
     Serial.print("Attempting MQTT connection...");
-    // Create a random client ID
     String clientId = "ESP8266Client-";
     clientId += String(random(0xffff), HEX);
-    
-    // Attempt to connect with clientID, username and password
+
     if (client.connect(clientId.c_str(), mqttuser, mqttpass)) {
       Serial.println("connected");
-      // ... and resubscribe
       client.subscribe("student/CASA0014/plant/ucfnmut/inTopic");
     } else {
       Serial.print("failed, rc=");
       Serial.print(client.state());
       Serial.println(" try again in 5 seconds");
-      // Wait 5 seconds before retrying
       delay(5000);
     }
   }
 }
 
 void startWebserver() {
-  // when connected and IP address obtained start HTTP server  
-  server.on("/", handle_OnConnect);
+  server.on("/", HTTP_GET, handle_OnConnect);
+  server.on("/sendMessage", HTTP_GET, handle_SendMessage);
   server.onNotFound(handle_NotFound);
   server.begin();
-  Serial.println("HTTP server started");  
+  Serial.println("HTTP server started");
 }
 
 void handle_OnConnect() {
-  Temperature = dht.readTemperature(); // Gets the values of the temperature
-  Humidity = dht.readHumidity(); // Gets the values of the humidity
+  Temperature = dht.readTemperature();
+  Humidity = dht.readHumidity();
   server.send(200, "text/html", SendHTML(Temperature, Humidity, Moisture));
 }
+
+void handle_SendMessage() {
+  userInput = server.arg("message");
+  Serial.print("User Input: ");
+  Serial.println(userInput);
+  
+  // Process the user input as needed
+  
+  // Redirect back to the main page
+  server.sendHeader("Location", String("/"), true);
+  server.send(302, "text/plain", "Message sent to Serial Monitor");
+}
+
 
 void handle_NotFound() {
   server.send(404, "text/plain", "Not found");
@@ -298,8 +233,7 @@ String SendHTML(float Temperaturestat, float Humiditystat, int Moisturestat) {
   ptr += "</head>\n";
   ptr += "<body>\n";
   ptr += "<div id=\"webpage\">\n";
-  ptr += "<h1>ESP8266 Huzzah DHT22 Report</h1>\n";
-
+  ptr += "<h1>Plant Monitor Lily</h1>\n";
   ptr += "<p>Temperature: ";
   ptr += (int)Temperaturestat;
   ptr += " C</p>";
@@ -309,12 +243,16 @@ String SendHTML(float Temperaturestat, float Humiditystat, int Moisturestat) {
   ptr += "<p>Moisture: ";
   ptr += Moisturestat;
   ptr += "</p>";
-  ptr += "<p>Sampled on: ";
+  ptr += "<form action=\"/sendMessage\" method=\"GET\">";
+  ptr += "  <label for=\"message\">Enter Message:</label><br>";
+  ptr += "  <input type=\"text\" id=\"message\" name=\"message\"><br>";
+  ptr += "  <button type=\"submit\">Send Message</button>";
+  ptr += "</form>";
+  ptr += "<p>Date and Time: ";
   ptr += GB.dateTime("l,");
   ptr += "<br>";
   ptr += GB.dateTime("d-M-y H:i:s T");
   ptr += "</p>";
-
   ptr += "</div>\n";
   ptr += "</body>\n";
   ptr += "</html>\n";
