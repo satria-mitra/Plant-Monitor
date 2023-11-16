@@ -15,6 +15,7 @@ Eventhough Lily is a plant, she is still a creature, we just do not know how to 
 ## Features added V 1.0
 Some cool features that has been implemented are :
 - Subscribing to topic `student/CASA0014/ucfnmut/forLily` and sending the messages for Lily and displaying on display
+- Add text input at web server for sending message to Lily (you need to connec to CE Hub Wifi)
 
 
 ## Prerequisites
@@ -97,6 +98,9 @@ This is the final project looks like that I build during my workshop at CASA. I 
  
  ![How this V.1 looks like](https://github.com/satria-mitra/Plant-Monitor/blob/main/asset/final2.jpg)
 
+If you are around CASA Lab, and connected to CE wifi, you can send message to Lily by scan qrcode below and input your message on text box.
+
+ ![QRCode](https://github.com/satria-mitra/Plant-Monitor/blob/main/asset/qrcode.png)
 
 # Challange and lesson learned during development process
 - ESP8266 only works in `CE-Hub-Student` network
