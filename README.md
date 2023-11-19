@@ -1,4 +1,4 @@
-![Lily](https://github.com/satria-mitra/Plant-Monitor/blob/main/asset/lily.jpg)
+![Lily](https://github.com/satria-mitra/Plant-Monitor/blob/main/resources/image/lily.jpg)
 
 Say Hi to Lily!
 
@@ -44,14 +44,14 @@ The code includes the following libraries:
 
 The original project was built using Plant Monitor Shield V2 from [Plant Monitor](https://github.com/ucl-casa-ce/casa0014/tree/main/plantMonitor) and mainly built during CE Wokrshop in the class. For prototyping process, I use breadboard rather than using the original Shield
 
-![Prototyping process](https://github.com/satria-mitra/Plant-Monitor/blob/main/asset/prototyping_process.jpg)
+![Prototyping process](https://github.com/satria-mitra/Plant-Monitor/blob/main/resources/image/prototyping_process.jpg)
 
 Image: Prototyping process with LCD added
 
 ## Schematis and paper design
 Started with thinking of what features that I want to add to plant monitor, I ended up with adding OLED Display to the original projects. Apart from the original schematics (which can be seen in [Duncan's Plant monitor projects](https://github.com/ucl-casa-ce/casa0014/tree/main/plantMonitor), I added schematics for OLED Display. The sketch below shows the design of the circuit :
 
-![Schematics](https://github.com/satria-mitra/Plant-Monitor/blob/main/asset/schematiscs.jpg)
+![Schematics](https://github.com/satria-mitra/Plant-Monitor/blob/main/resources/image/schematiscs.jpg)
 
 Image: Schematics on paper, red dotted line shows original project, blue dotted line shows additional OLED Display 
 
@@ -64,7 +64,7 @@ I add an oled display so I can send messages to Lily and display it on. Try to s
 
 - I  use MQTT protocols to send the data to the CE server. The data (Temperature, humidity, and soil mosture) was sent to the topic `student/CASA0014/plant/ucfnmut/inTopic`.
 
- ![mqttdata](https://github.com/satria-mitra/Plant-Monitor/blob/main/asset/mqttexplorer.jpg)
+ ![mqttdata](https://github.com/satria-mitra/Plant-Monitor/blob/main/resources/image/mqttexplorer.jpg)
 
  Image: Data on MQTT Explorer 
 
@@ -76,7 +76,7 @@ I use Rasp PI as a gateway. The whole process is long enough, but it could be re
 - Configure InfluxDB and Telegraf to capture the data from MQTT topics.
 - Create a dashboard in Grafana to visualize the data
 
-![dashboard](https://github.com/satria-mitra/Plant-Monitor/blob/main/asset/influxdb.jpg)
+![dashboard](https://github.com/satria-mitra/Plant-Monitor/blob/main/resources/image/influxdb.jpg)
 Image: InfluxDB shows data from Raspberry PI
 
 
@@ -84,7 +84,7 @@ Image: InfluxDB shows data from Raspberry PI
 
 Grafana could be used as a dashboard to display the data. In order to do this, in Grafana we create a new dashboard and copy this code to the query to the query panel on the bottom. Again, this code can be seen on [CE Workshop Plant Monitor](https://workshops.cetools.org/codelabs/CASA0014-2-Plant-Monitor/#0)
 
-![dashboard](https://github.com/satria-mitra/Plant-Monitor/blob/main/asset/grafana.jpg)
+![dashboard](https://github.com/satria-mitra/Plant-Monitor/blob/main/resources/image/grafana.jpg)
 
 Image: Grafana Dashboard showing data from Lily
 
@@ -93,14 +93,14 @@ Image: Grafana Dashboard showing data from Lily
 
 This is the final project looks like that I build during my workshop at CASA. I hope to make this even better in the future
 
- ![final](https://github.com/satria-mitra/Plant-Monitor/blob/main/asset/final1.jpg)
+ ![final](https://github.com/satria-mitra/Plant-Monitor/blob/main/resources/image/final1.jpg)
 
  
- ![How this V.1 looks like](https://github.com/satria-mitra/Plant-Monitor/blob/main/asset/final2.jpg)
+ ![How this V.1 looks like](https://github.com/satria-mitra/Plant-Monitor/blob/main/resources/image/final2.jpg)
 
 If you are around CASA Lab, and connected to CE wifi, you can send message to Lily by scan qrcode below and input your message on text box.
 
- ![QRCode](https://github.com/satria-mitra/Plant-Monitor/blob/main/asset/qrcode.png)
+ ![QRCode](https://github.com/satria-mitra/Plant-Monitor/blob/main/resources/image/qrcode.png)
 
 # Challange and lesson learned during development process
 - ESP8266 only works in `CE-Hub-Student` network
