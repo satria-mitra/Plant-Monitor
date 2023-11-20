@@ -90,7 +90,7 @@ Image: InfluxDB shows data from Raspberry PI
 
 Grafana could be used as a dashboard to display the data. In order to do this, in Grafana we create a new dashboard and copy this code to the query to the query panel on the bottom. Again, this code can be seen on [CE Workshop Plant Monitor](https://workshops.cetools.org/codelabs/CASA0014-2-Plant-Monitor/#0)
 
-![dashboard](https://github.com/satria-mitra/Plant-Monitor/blob/main/resources/image/grafana.jpg)
+![dashboard](https://github.com/satria-mitra/Plant-Monitor/blob/main/resources/image/grafana.png)
 
 Image: Grafana Dashboard showing data from Lily
 
@@ -106,9 +106,9 @@ This is the final project looks like that I build during my workshop at CASA. I 
 
 If you are around CASA Lab, and connected to CE wifi, you can send message to Lily by scan qrcode below and input your message on text box.
 
-|  ![QRCode](https://github.com/satria-mitra/Plant-Monitor/blob/main/resources/image/qrcode.png)
+  ![QRCode](https://github.com/satria-mitra/Plant-Monitor/blob/main/resources/image/qrcode.png)
 |  ![Web server](https://github.com/satria-mitra/Plant-Monitor/blob/main/resources/image/webserver.png)
- |
+
 
 
 # Challange and lesson learned during development process
