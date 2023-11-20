@@ -210,11 +210,18 @@ void handle_SendMessage() {
   Serial.print("User Input: ");
   Serial.println(userInput);
   
-  // Process the user input as needed
-  
+  // Publish userInput to MQTT
+  if (client.connected()) {
+    client.publish("student/CASA0014/ucfnmut/forLily", userInput.c_str()); // Replace "your_MQTT_topic_here" with your desired MQTT topic
+    Serial.println("Message published to MQTT");
+  } else {
+    Serial.println("Failed to publish message. MQTT not connected.");
+  }  
+
   // Redirect back to the main page
   server.sendHeader("Location", String("/"), true);
   server.send(302, "text/plain", "Message sent to Serial Monitor");
+
 }
 
 
