@@ -12,10 +12,16 @@ However, she sometimes feel alone and worry about me if I'm not around. So I wan
 
 Eventhough Lily is a plant, she is still a creature, we just do not know how to interact and communicate with them. So I want to develop a way to make interaction between human and a plant limitless.
 
-## Features added V 1.0
-Some cool features that has been implemented are :
+## Changelog
+
+Current version V1.1.0
 - Subscribing to topic `student/CASA0014/ucfnmut/forLily` and sending the messages for Lily and displaying on display
 - Add text input at web server for sending message to Lily (you need to connec to CE Hub Wifi)
+
+### Version 1.1.0
+Added :
+- Add text input at web server (IP 10.129.125.198 in CASA CE Network) to send message to Lily
+
 
 
 ## Prerequisites
@@ -102,6 +108,8 @@ If you are around CASA Lab, and connected to CE wifi, you can send message to Li
 
  ![QRCode](https://github.com/satria-mitra/Plant-Monitor/blob/main/resources/image/qrcode.png)
 
+ ![Web server](https://github.com/satria-mitra/Plant-Monitor/blob/main/resources/image/webserver.png)
+
 # Challange and lesson learned during development process
 - ESP8266 only works in `CE-Hub-Student` network
 - Try to see data from a large big picture, so it can show you the trend of data and see what's going on
@@ -114,9 +122,7 @@ If you are around CASA Lab, and connected to CE wifi, you can send message to Li
 I also want to implement improvement in the future if I have a chance to upgrade this project. Some cool improvements that came into my mind were :
 
 - Add an led as a sign of incoming message
-- Prototype my own pcb board so it can fit oled display
-- Usinf bigger display
-- Playing a sound from subscribed messages using [Talki library](https://www.arduinolibraries.info/libraries/talkie)
+- Prototype my own pcb board so it can fit bigger oled display
 - [Sonification project](https://www.instructables.com/Biodata-Sonification/) using sound to illustrate how a Plant could singing :)
 - [RGB Audio visualizer](https://projecthub.arduino.cc/janux/rgb-32-band-audio-spectrum-visualizer-2f4788) also would be a perfect companion for that sonification idea
 
