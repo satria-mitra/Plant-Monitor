@@ -106,9 +106,10 @@ This is the final project looks like that I build during my workshop at CASA. I 
 
 If you are around CASA Lab, and connected to CE wifi, you can send message to Lily by scan qrcode below and input your message on text box.
 
- ![QRCode](https://github.com/satria-mitra/Plant-Monitor/blob/main/resources/image/qrcode.png)
+|  ![QRCode](https://github.com/satria-mitra/Plant-Monitor/blob/main/resources/image/qrcode.png)
+|  ![Web server](https://github.com/satria-mitra/Plant-Monitor/blob/main/resources/image/webserver.png)
+ |
 
- ![Web server](https://github.com/satria-mitra/Plant-Monitor/blob/main/resources/image/webserver.png)
 
 # Challange and lesson learned during development process
 - ESP8266 only works in `CE-Hub-Student` network
